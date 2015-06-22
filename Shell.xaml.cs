@@ -1,6 +1,8 @@
 ﻿namespace PrismSandbox
 {
     using FirstFloor.ModernUI.Windows.Controls;
+    using Microsoft.Practices.Prism.Regions;
+    using Microsoft.Practices.Unity;
     using System;
     using System.Globalization;
     using System.Windows;
@@ -14,29 +16,20 @@
     /// </summary>
     public partial class Shell : Window
     {
+        [Dependency]
+        public IRegionManager regionManager { get; set; }
 
+        [Dependency]
+        public IUnityContainer container { get; set; }
         /// <summary>
         /// Initializes a new instance of the <see cref="Shell"/> class.
         /// </summary>
-        public Shell(ShellViewModel vm)
+        public Shell()
         {
             InitializeComponent();
-            this.DataContext = vm;
-           
-            
+            regionManager.RegisterViewWithRegion("MainRegion", () => this.container.Resolve<XMLDocumentView.View>());
         }
 
-        private void xmlTreeView_Loaded(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                ((sender as TreeView).Items.GetItemAt(0) as TreeViewItem).ExpandSubtree();
-            }
-            catch (Exception ex)
-            {
-                Console.Write(ex.Message);
-            }
-        }
 
 
 

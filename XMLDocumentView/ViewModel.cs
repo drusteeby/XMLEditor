@@ -7,6 +7,7 @@ using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,11 +17,26 @@ using System.Windows.Data;
 using System.Xml;
 using System.Xml.Linq;
 
-namespace PrismSandbox
+namespace PrismSandbox.XMLDocumentView
 {
-    public partial class ShellViewModel : DependencyObject
+    public partial class ViewModel : DependencyObject
     {
+
+
+        public ViewModel()
+        {
+
+            
+            initProperties();
+            initCommands();
+            initEvents();
+        }
+
+
+
     }
+
+
 }
 
     

@@ -120,25 +120,35 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AddAlarmView\View.xaml.cs">
+      <DependentUpon>View.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AddAlarmView\ViewModel.cs" />
     <Compile Include="Converters.cs" />
-    <Compile Include="ObservableCollection.cs" />
     <Compile Include="SampleData\SampleNode\SampleNode.xaml.cs">
       <DependentUpon>SampleNode.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ShellModel.cs" />
-    <Compile Include="ShellViewModelEvents.cs" />
+    <Compile Include="XMLDocumentView\Model.cs" />
+    <Compile Include="XMLDocumentView\ViewModelEvents.cs" />
     <Compile Include="node.cs" />
     <Compile Include="NodeView.xaml.cs">
       <DependentUpon>NodeView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ShellViewModel.cs" />
-    <Compile Include="ShellViewModelCommands.cs" />
-    <Compile Include="ShellViewModelProperties.cs" />
+    <Compile Include="XMLDocumentView\ViewModel.cs" />
+    <Compile Include="XMLDocumentView\ViewModelCommands.cs" />
+    <Compile Include="XMLDocumentView\ViewModelProperties.cs" />
     <Compile Include="TemplateSelectors\NodeViewSelector.cs" />
     <Compile Include="TemplateViews\DefaultView.xaml.cs">
       <DependentUpon>DefaultView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="XMLDocumentViewContainer.cs" />
+    <Compile Include="XMLDocumentView\Container.cs" />
+    <Compile Include="XMLDocumentView\View.xaml.cs">
+      <DependentUpon>View.xaml</DependentUpon>
+    </Compile>
+    <Page Include="AddAlarmView\View.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="NodeView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -169,6 +179,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Themes\ModernUI.CustomTheme.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="XMLDocumentView\View.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

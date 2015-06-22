@@ -10,9 +10,9 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Xml;
 
-namespace PrismSandbox
+namespace PrismSandbox.XMLDocumentView
 {
-    public partial class ShellViewModel
+    public partial class ViewModel
     {
         public DelegateCommand saveAs { get; set; }
         public DelegateCommand save { get; set; }
@@ -22,22 +22,36 @@ namespace PrismSandbox
         public DelegateCommand DeleteNode { get; set; }
         public DelegateCommand<SelectionChangedEventArgs> SelectionChanged { get; set; }
         public DelegateCommand RemoveXMLFile { get; set; }
+        public DelegateCommand ClearSettings { get; set; }
 
         public void initCommands()
         {
             saveAs = new DelegateCommand(OnSaveAs);
             save = new DelegateCommand(OnSave);
-            SelectedItemChanged = new DelegateCommand<RoutedPropertyChangedEventArgs<Object>>(OnSelectedItemChanged);
-            updateView = new DelegateCommand(OnUpdateView);
+            SelectedItemChanged = new DelegateCommand<RoutedPropertyChangedEventArgs<Object>>(OnSelectedItemChanged);            
             AddXMLFile = new DelegateCommand(OnAddXMLFile);
             DeleteNode = new DelegateCommand(OnDeleteNode, CanDeleteNode);
             SelectionChanged = new DelegateCommand<SelectionChangedEventArgs>(OnSelectionChanged);
-            //RemoveXMLFile = new DelegateCommand(OnRemoveXMLFile);
+            RemoveXMLFile = new DelegateCommand(OnRemoveXMLFile);
+            ClearSettings = new DelegateCommand(OnClearSettings);
+        }
+
+        public void OnClearSettings()
+        {
+            _model.ClearSettings();
+        }
+
+        public void OnRemoveXMLFile()
+        {
+            _model.RemoveFile(SelectedDocument.FullFilePath);     
         }
 
         public void OnSelectionChanged(SelectionChangedEventArgs e)
         {
-            SelectedDocument = XMLDataProviderList.ElementAt((e.Source as TabControl).SelectedIndex).Document;
+            int index = (e.Source as TabControl).SelectedIndex;
+
+            if (XMLDocumentViewContainers.Count >= index && index >= 0) 
+                SelectedDocument = XMLDocumentViewContainers.ElementAt(index);
 
         }
 
@@ -45,6 +59,8 @@ namespace PrismSandbox
         {
             SelectedNode = (XmlNode)(e.NewValue);
             DeleteNode.RaiseCanExecuteChanged();
+
+            
         }
 
         public void OnDeleteNode()
@@ -68,16 +84,10 @@ namespace PrismSandbox
 
             if (dialog.ShowDialog() == true)
             {
-                AddDocument(dialog.FileName);
+                _model.AddFile(dialog.FileName);
             }
         }
 
-        public void OnUpdateView()
-        {
-            XmlDocument temp = SelectedDocument;
-            SelectedDocument = new XmlDocument();
-            SelectedDocument = temp;
-        }
 
         public void OnSaveAs()
         {
@@ -87,27 +97,16 @@ namespace PrismSandbox
 
             if (dialog.FileName != "")
             {
-                SelectedDocument.Save(dialog.FileName);
-                
+                SelectedDocument.XMLDataProvider.Document.Save(dialog.FileName);                           
             }
         }
 
         public void OnSave()
-        {            
-            SelectedDocument.Save(new Uri(SelectedDocument.BaseURI).LocalPath);
-        }
-
-        private void AddDocument(string fileName)
         {
-            XmlDocument toAdd = new XmlDocument();
-            toAdd.Load(fileName);
-
-            XmlDataProvider provider = new XmlDataProvider();
-            provider.Document = toAdd;
-            XMLDataProviderList.Add(provider);
-
-            Properties.Settings.Default.filePaths.Add(fileName);
-            Properties.Settings.Default.Save();
+            SelectedDocument.XMLDataProvider.Document.Save(SelectedDocument.FullFilePath);
+            SelectedDocument.unsavedChanges = false;
         }
+
+
     }
 }

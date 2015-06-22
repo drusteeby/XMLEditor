@@ -7,26 +7,26 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Data;
 
-namespace PrismSandbox
+namespace PrismSandbox.XMLDocumentView
 {
-    public class XMLDocumentViewContainer
+    public class ViewContainer
     {
         public XmlDataProvider XMLDataProvider { get; set; }
         public ObservableCollection<DataTag> DataTags { get; set; }        
         public string FullFilePath { get; set; }
-        private bool _unsavedChanges;
+        public bool unsavedChanges;
 
         public string Header
         {
             get
             {
-                return FullFilePath.Split('\\').Last() + (_unsavedChanges ? "*": " ");
+                return FullFilePath.Split('\\').Last() + (unsavedChanges ? "*": " ");
             }
 
         }
         
 
-        public XMLDocumentViewContainer(XmlDataProvider provider)
+        public ViewContainer(XmlDataProvider provider)
         {
             XMLDataProvider = provider;
             XMLDataProvider.DataChanged += XMLDataProvider_DataChanged;
@@ -37,7 +37,7 @@ namespace PrismSandbox
 
         void XMLDataProvider_DataChanged(object sender, EventArgs e)
         {
-            _unsavedChanges = true;
+            unsavedChanges = true;
         }
 
 
