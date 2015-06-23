@@ -16,13 +16,14 @@ using System.Windows.Shapes;
 namespace PrismSandbox.AddAlarmView
 {
     /// <summary>
-    /// Interaction logic for AddAlarmView.xaml
+    /// Interaction logic for View.xaml
     /// </summary>
     public partial class View : UserControl
     {
-        public View()
+        public View(ViewModel vm)
         {
             InitializeComponent();
+            this.DataContext = vm;
         }
     }
 }

@@ -5,6 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:ia="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:local="clr-namespace:PrismSandbox"
+             xmlns:prism="http://www.codeplex.com/prism"
+             xmlns:AlarmView="clr-namespace:PrismSandbox.CurrentAlarmsView"
              xmlns:cmd="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Platform"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
@@ -79,7 +81,8 @@
         </HierarchicalDataTemplate>
     </UserControl.Resources>
     <Grid Grid.Row="1" Margin="0,0,0,0">
-
+        
+       
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
@@ -98,12 +101,12 @@
                 <MenuItem Header="Save As" Command="{Binding saveAs}"/>
             </MenuItem>
             <MenuItem Header="Edit">
-
+                <MenuItem Header="Add Alarm" Command="{Binding AddAlarm}"/>
                 <MenuItem Header="Delete Node" Command="{Binding DeleteNode}"/>
                 <MenuItem Header="Clear Settings" Command="{Binding ClearSettings}"/>
             </MenuItem>
             <MenuItem Header="View">
-
+                <MenuItem Header="Alarm Popup" Command="{Binding AlarmView}"/>
             </MenuItem>
         </Menu>
 

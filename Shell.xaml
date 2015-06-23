@@ -4,11 +4,16 @@
 	    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 	    xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d"
         xmlns:local="clr-namespace:PrismSandbox"
+        xmlns:AlarmView="clr-namespace:PrismSandbox.CurrentAlarmsView"
+        xmlns:ia="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:r="clr-namespace:Microsoft.Windows.Controls.Ribbon;assembly=RibbonControlsLibrary"
         xmlns:prism="http://www.codeplex.com/prism"
+        xmlns:cmd="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Platform"
         WindowStartupLocation="CenterScreen"
         ResizeMode="CanResize"
-        SizeToContent="Width" >
+        SizeToContent="Width" 
+        Height="{Binding MainWindowHeight,Mode=OneWayToSource}"
+        Width="{Binding MainWindowWidth,Mode=OneWayToSource}">
     
     <Window.Resources>
 
@@ -16,20 +21,12 @@
 
 
     </Window.Resources>
+    <Grid>
+        <ContentControl prism:RegionManager.RegionName="MainRegion"/>
+        <ContentControl prism:RegionManager.RegionName="PopupRegion"/>
+    </Grid>
 
 
-
-    <ContentControl prism:RegionManager.RegionName="MainRegion">
-        
-        <prism:InteractionRequestTrigger SourceObject="{Binding SendMessageRequest}">
-            <prism:PopupWindowAction IsModal="True">
-                <prism:PopupWindowAction.WindowContent>
-                    <local:AddAlarmView/>
-                </prism:PopupWindowAction.WindowContent>
-            </prism:PopupWindowAction>
-        </prism:InteractionRequestTrigger>
-        
-    </ContentControl>
 
 
 

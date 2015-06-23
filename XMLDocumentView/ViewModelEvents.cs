@@ -22,11 +22,11 @@ namespace PrismSandbox.XMLDocumentView
 {
     public partial class ViewModel : DependencyObject
     {
-        private InteractionRequest<AddAlarmView.ViewModel> addAlarmRequest;
+       
         public void initEvents()
         {
             _model.XMLDataProviderList.CollectionChanged += XMLDataProviderList_CollectionChanged;
-            addAlarmRequest = new InteractionRequest<AddAlarmView.ViewModel>();
+            
         }
 
         void XMLDataProviderList_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)

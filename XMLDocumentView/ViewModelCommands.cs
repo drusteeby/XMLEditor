@@ -1,4 +1,6 @@
 ﻿using Microsoft.Practices.Prism.Commands;
+using Microsoft.Practices.Prism.Regions;
+using Microsoft.Practices.Unity;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
@@ -9,6 +11,8 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Xml;
+using PrismSandbox.CurrentAlarmsView;
+using PrismSandbox.AddAlarmView;
 
 namespace PrismSandbox.XMLDocumentView
 {
@@ -23,6 +27,8 @@ namespace PrismSandbox.XMLDocumentView
         public DelegateCommand<SelectionChangedEventArgs> SelectionChanged { get; set; }
         public DelegateCommand RemoveXMLFile { get; set; }
         public DelegateCommand ClearSettings { get; set; }
+        public DelegateCommand AlarmView { get; set; }
+        public DelegateCommand AddAlarm { get; set; }
 
         public void initCommands()
         {
@@ -34,6 +40,27 @@ namespace PrismSandbox.XMLDocumentView
             SelectionChanged = new DelegateCommand<SelectionChangedEventArgs>(OnSelectionChanged);
             RemoveXMLFile = new DelegateCommand(OnRemoveXMLFile);
             ClearSettings = new DelegateCommand(OnClearSettings);
+            AlarmView = new DelegateCommand(OnAlarmView);
+            AddAlarm = new DelegateCommand(OnAddAlarm);
+        }
+
+        public void RemoveAllPopups()
+        {
+            foreach( var v in regionManager.Regions["PopupRegion"].Views)
+                regionManager.Regions["PopupRegion"].Remove(v);
+        }
+
+        public void OnAddAlarm()
+        {
+            RemoveAllPopups();
+            regionManager.RegisterViewWithRegion("PopupRegion", () => this.container.Resolve<AddAlarmView.View>());   
+            
+        }
+
+        public void OnAlarmView()
+        {
+            RemoveAllPopups();
+            regionManager.RegisterViewWithRegion("PopupRegion", () => this.container.Resolve<CurrentAlarmsView.View>());
         }
 
         public void OnClearSettings()

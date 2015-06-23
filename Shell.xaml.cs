@@ -28,10 +28,35 @@
         {
             InitializeComponent();
             regionManager.RegisterViewWithRegion("MainRegion", () => this.container.Resolve<XMLDocumentView.View>());
+                      
         }
 
 
 
+
+        public double MainWindowHeight
+        {
+            get { return (double)GetValue(MainWindowHeightProperty); }
+            set { SetValue(MainWindowHeightProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for MainWindowHeight.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty MainWindowHeightProperty =
+            DependencyProperty.Register("MainWindowHeight", typeof(double), typeof(Shell), new PropertyMetadata(null));
+
+
+
+        public double MainWindowWidth
+        {
+            get { return (double)GetValue(MainWindowWidthProperty); }
+            set { SetValue(MainWindowWidthProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for MainWindowWidth.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty MainWindowWidthProperty =
+            DependencyProperty.Register("MainWindowWidth", typeof(double), typeof(Shell), new PropertyMetadata(null));     
+
+        
 
     }
 }

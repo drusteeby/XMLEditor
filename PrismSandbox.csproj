@@ -124,10 +124,17 @@
       <DependentUpon>View.xaml</DependentUpon>
     </Compile>
     <Compile Include="AddAlarmView\ViewModel.cs" />
+    <Compile Include="Controls\SearchTextBox.cs" />
+    <Compile Include="CurrentAlarmsView\View.xaml.cs">
+      <DependentUpon>View.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CurrentAlarmsView\ViewModel.cs" />
     <Compile Include="Converters.cs" />
+    <Compile Include="EnumerationContainer.cs" />
     <Compile Include="SampleData\SampleNode\SampleNode.xaml.cs">
       <DependentUpon>SampleNode.xaml</DependentUpon>
     </Compile>
+    <Compile Include="TagHelper.cs" />
     <Compile Include="XMLDocumentView\Model.cs" />
     <Compile Include="XMLDocumentView\ViewModelEvents.cs" />
     <Compile Include="node.cs" />
@@ -146,6 +153,10 @@
       <DependentUpon>View.xaml</DependentUpon>
     </Compile>
     <Page Include="AddAlarmView\View.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CurrentAlarmsView\View.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -175,6 +186,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="TemplateViews\DefaultView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ControlThemes.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
